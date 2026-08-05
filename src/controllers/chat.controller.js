@@ -1,6 +1,6 @@
 import Chat from "../models/chat.js";
 import Message from "../models/message.js";
-import { askAI } from "../services/openai.service.js";
+import { askAI } from "../services/huggingface.service.js"; // change this
 
 export const createChat = async (req, res) => {
   try {
