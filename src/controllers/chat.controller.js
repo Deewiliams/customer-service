@@ -78,13 +78,44 @@ export const getRecentChats = async (req, res) => {
       userId: req.user._id,
     })
       .sort({
-        createdAt: -1, // newest chats first
+        createdAt: -1,
       })
-      .limit(20); // return latest 20 chats
+      .lean();
 
+    const chatsWithMessages = await Promise.all(
+      chats.map(async (chat) => {
+        const lastMessage = await Message.findOne({
+          chatId: chat._id,
+        }).sort({
+          createdAt: -1,
+        });
 
-    res.json(chats);
+        return {
+          ...chat,
+          lastMessage: lastMessage?.content || "New Chat",
+        };
+      }),
+    );
 
+    res.json(chatsWithMessages);
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
+    });
+  }
+};
+
+export const getChatsByUserId = async (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    const chats = await Chat.find({
+      userId,
+    }).sort({
+      createdAt: -1,
+    });
+
+    res.status(200).json(chats);
   } catch (error) {
     res.status(500).json({
       message: error.message,
