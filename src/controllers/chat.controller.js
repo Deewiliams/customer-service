@@ -71,3 +71,23 @@ export const getMessages = async (req, res) => {
     });
   }
 };
+
+export const getRecentChats = async (req, res) => {
+  try {
+    const chats = await Chat.find({
+      userId: req.user._id,
+    })
+      .sort({
+        createdAt: -1, // newest chats first
+      })
+      .limit(20); // return latest 20 chats
+
+
+    res.json(chats);
+
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
+    });
+  }
+};
