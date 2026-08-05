@@ -5,34 +5,28 @@ const client = new OpenAI({
   apiKey: process.env.HF_API_KEY,
 });
 
-
 export const askAI = async (message) => {
   try {
-
     const completion = await client.chat.completions.create({
-      model: "deepseek-ai/DeepSeek-V3-0324",
+      model: "Qwen/Qwen2.5-7B-Instruct",
 
       messages: [
         {
           role: "system",
           content:
-            "You are a helpful customer service assistant. Answer customers politely."
+            "You are a helpful customer service assistant. Answer customers politely.",
         },
         {
           role: "user",
-          content: message
-        }
+          content: message,
+        },
       ],
 
-      max_tokens: 500
+      max_tokens: 500,
     });
 
-
     return completion.choices[0].message.content;
-
-
   } catch (error) {
-
     console.log("STATUS:", error.status);
     console.log("ERROR:", error.message);
     console.log("DETAILS:", error.error);
