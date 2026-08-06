@@ -3,11 +3,11 @@ import cors from "cors";
 import dotenv from "dotenv";
 
 dotenv.config();
+import authRoutes from "./src/routes/auth.routes.js";
+import userRoutes from "./src/routes/user.routes.js";
+import chatRoutes from "./src/routes/chat.routes.js";
+import homeRoutes from "./src/routes/index.routes.js";
 
-import authRoutes from "./routes/auth.routes.js";
-import userRoutes from "./routes/user.routes.js";
-import chatRoutes from "./routes/chat.routes.js";
-import homeRoutes from "./routes/index.routes.js";
 
 const app = express();
 
