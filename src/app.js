@@ -17,5 +17,6 @@ app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/chat", chatRoutes);
+app.use("/", "<h1>Welcome to AI Support Chatbot</h1>");
 
 export default app;
