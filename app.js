@@ -8,11 +8,10 @@ import userRoutes from "./src/routes/user.routes.js";
 import chatRoutes from "./src/routes/chat.routes.js";
 import homeRoutes from "./src/routes/index.routes.js";
 
-
 const app = express();
 
 const corsOptions = {
-  origin: ["http://localhost:5173", "https://your-frontend-url.vercel.app"],
+  origin: ["http://localhost:5173", "https://ai-support-chat-vert.vercel.app"],
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true,
